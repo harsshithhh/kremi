@@ -56,12 +56,36 @@ h1, h2, h3 {
             padding: 0 24px;
         }
 
-        /* Hamburger in Hero */
+/* Logo in Hero */
+.hero-logo {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+}
+
+.hero-logo img {
+    height: 50px;
+    width: auto;
+}
+
+/* Hamburger in Hero */
 .hero-hamburger {
     position: absolute;
     top: 30px;
     right: 40px;
     z-index: 30;
+}
+
+@media (max-width: 768px) {
+    .hero-hamburger {
+        top: 45px;
+    }
+    
+    .hero-logo {
+        top: 45px;
+    }
 }
 
 /* Hamburger Button */
@@ -159,6 +183,16 @@ h1, h2, h3 {
     padding: 10px 20px;
 }
 
+@media (max-width: 768px) {
+    .menu-link {
+        font-size: 2rem;
+    }
+    
+    .menu-link .japanese {
+        font-size: 1rem;
+    }
+}
+
 .menu-link .japanese {
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 400;
@@ -172,19 +206,6 @@ h1, h2, h3 {
     transform: translateX(10px);
     opacity: 0.7;
 }
-
-        /* Tile Grid Background */
-        .tile-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-background-image: 
-    repeating-linear-gradient(0deg, transparent, transparent 38px, rgba(255, 255, 255, 0.25) 38px, rgba(255, 255, 255, 0.25) 42px),
-    repeating-linear-gradient(90deg, transparent, transparent 38px, rgba(255, 255, 255, 0.25) 38px, rgba(255, 255, 255, 0.25) 42px);            pointer-events: none;
-            z-index: 0;
-        }
 
         /* Hero Section - RED BACKGROUND */
         .hero {
@@ -329,9 +350,8 @@ background-image:
     width: 84px;
     height: 8px;
     border-radius: 8px;
-    background: linear-gradient(90deg, var(--caramel), #d4a03a, #c88f2e);
+    background: #FFD700;
     margin: 40px auto;
-    box-shadow: 0 2px 8px rgba(227, 180, 91, 0.3);
 }
 
         /* Signature Flavours Section - RED BACKGROUND */
@@ -677,18 +697,19 @@ background-image:
 <!-- Full Screen Menu Overlay -->
 <div class="menu-overlay" id="menuOverlay">
     <button class="close-menu" id="closeMenu" aria-label="Close Menu">×</button>
-    <div class="menu-content">
-        <a href="#" class="menu-link">Home <span class="japanese">ホーム</span></a>
-        <a href="#menu" class="menu-link">Menu <span class="japanese">メニュー</span></a>
-        <a href="#contact" class="menu-link">Contact <span class="japanese">お問い合わせ</span></a>
-    </div>
+<div class="menu-content">
+    <a href="index.html" class="menu-link">Home <span class="japanese">ホーム</span></a>
+    <a href="about.html" class="menu-link">About <span class="japanese">私たちについて</span></a>
+    <a href="menu.html" class="menu-link">Menu <span class="japanese">メニュー</span></a>
+</div>
 </div>
 
 <!-- Hero Section - RED -->
 <section class="hero">
-    <div class="tile-background"></div>
-    <div class="hero-hamburger">
-        <button class="hamburger" id="hamburger" aria-label="Menu">
+    <div class="hero-logo">
+        <img src="logo.png" alt="KREMI Logo">
+    </div>
+    <div class="hero-hamburger">        <button class="hamburger" id="hamburger" aria-label="Menu">
             <span></span>
             <span></span>
             <span></span>
@@ -700,12 +721,12 @@ background-image:
                 <h1>Freshly torched Japanese brûlée crêpes</h1>
                 <p class="hero-subtitle">Signature thin crêpes wrapped in a bright red cone, filled with custard and fresh fruit, finished with a caramelised brûlée top — made for sharing (and your feed).</p>
                 <div class="hero-ctas">
-                    <a href="#menu" class="btn btn-primary">view menu</a>
+                    <a href="menu.html" class="btn btn-primary">view menu</a>
                     <a href="#store" class="btn btn-outline">find us</a>
                 </div>
             </div>
             <div class="hero-image fade-in">
-                <img class="hero-img" src="/mnt/data/5f99168d-5728-4ccb-b429-4ff1b643a421.png" alt="KREMI signature crepe">
+                <img class="hero-img" src="heropagedesign.png" alt="KREMI signature crepe">
             </div>
         </div>
     </section>
@@ -717,43 +738,6 @@ background-image:
             <div class="divider"></div>
             <p>Step into our cozy space where traditional Japanese craftsmanship meets modern dessert culture. Every crêpe is freshly made and torched to perfection right before your eyes, bringing you an authentic taste experience that's worth the wait.</p>
             <p>From the iconic tile walls to our signature red aesthetic, we've created a warm atmosphere where every visit feels like a small celebration. Whether you're grabbing a quick treat or settling in with friends, KREMI is your destination for Instagram-worthy moments and unforgettable flavors.</p>
-        </div>
-    </section>
-
-    <!-- Signature Flavours Section - RED -->
-    <section id="menu" class="flavours-section">
-        <div class="section-title fade-in">
-            <h2>signature flavours</h2>
-            <p class="section-subtitle">hand-torched • made-to-order</p>
-        </div>
-        
-        <div class="flavours-grid">
-            <div class="flavour-card fade-in">
-                <span class="flag-label">best seller</span>
-                <img class="flavour-image" src="/mnt/data/5f99168d-5728-4ccb-b429-4ff1b643a421.png" alt="Matcha Brûlée">
-                <div class="flavour-content">
-                    <h3>matcha brûlée</h3>
-                    <p>Matcha crepe shell, custard, torched caramel crust. Balanced, bittersweet finish.</p>
-                </div>
-            </div>
-
-            <div class="flavour-card fade-in">
-                <span class="flag-label">seasonal</span>
-                <img class="flavour-image" src="/mnt/data/5f99168d-5728-4ccb-b429-4ff1b643a421.png" alt="Strawberry Custard">
-                <div class="flavour-content">
-                    <h3>strawberry custard</h3>
-                    <p>Fresh strawberries, creamy custard, a caramelised top — bright and photogenic.</p>
-                </div>
-            </div>
-
-            <div class="flavour-card fade-in">
-                <span class="flag-label">classic</span>
-                <img class="flavour-image" src="/mnt/data/5f99168d-5728-4ccb-b429-4ff1b643a421.png" alt="Classic Custard">
-                <div class="flavour-content">
-                    <h3>classic custard</h3>
-                    <p>Velvety custard finished with a thin torched crust — simple and timeless.</p>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -819,9 +803,13 @@ background-image:
                 <p>181 Orchard Road</p>
                 <p>Singapore 238896</p>
                 <p style="margin-top: 10px;">Daily: 11am - 9pm</p>
+                
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8019204749657!2d103.83929431475395!3d1.3010471990452833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19a4f8d5c46f%3A0xe46c9cf15c85a4d8!2sOrchard%20Central!5e0!3m2!1sen!2ssg!4v1234567890123!5m2!1sen!2ssg" allowfullscreen="" loading="lazy"></iframe>
+                </div>
             </div>
             
-<div class="footer-col">
+            <div class="footer-col">
                 <h4>Connect</h4>
                 <p><a href="mailto:hello@kremi.sg">hello@kremi.sg</a></p>
                 <p><a href="https://instagram.com/kremi.sg">@kremi.sg</a></p>
@@ -831,9 +819,9 @@ background-image:
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                         </svg>
                     </a>
-                    <a href="#" aria-label="Facebook">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    <a href="#" aria-label="Xiaohongshu">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50">
+                            <text x="50" y="25" font-family="Arial" font-size="40" fill="#FF2442" text-anchor="middle">小红书</text>
                         </svg>
                     </a>
                     <a href="#" aria-label="TikTok">
@@ -845,7 +833,8 @@ background-image:
             </div>
         </div>
         <div class="divider" style="margin: 50px auto 30px;"></div>
-<p style="font-size: 15px; opacity: 0.6;">© 2025 KREMI · Designed thoughtfully by Harshith Chinni</p>    </div>
+        <p style="font-size: 15px; opacity: 0.6;">© 2025 KREMI · Designed thoughtfully by Harshith Chinni</p>
+    </div>
 </footer>
 
     <script>

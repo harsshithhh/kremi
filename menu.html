@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu · KREMI · Brûlée Crêpes Singapore</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Kind Human';
+            src: url('kindhumanfont.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --red: #d10001;
+            --cream: #FAF8F5;
+            --text: #222;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 400;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-size: 18px;
+            background: var(--cream);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Kind Human', system-ui;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        /* Logo in Hero */
+        .hero-logo {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 30;
+        }
+
+        .hero-logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        /* Hamburger in Hero */
+        .hero-hamburger {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            z-index: 30;
+        }
+
+        @media (max-width: 768px) {
+            .hero-hamburger {
+                top: 45px;
+            }
+            
+            .hero-logo {
+                top: 45px;
+            }
+        }
+
+        /* Hamburger Button */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 50;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:hover span {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Menu Overlay */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--cream);
+            z-index: 45;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            background: none;
+            border: none;
+            font-size: 48px;
+            color: var(--red);
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            width: 48px;
+            height: 48px;
+            transition: transform 0.3s ease;
+        }
+
+        .close-menu:hover {
+            transform: rotate(90deg);
+        }
+
+        .menu-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu-link {
+            font-family: 'Kind Human', system-ui;
+            font-size: 3.5rem;
+            color: var(--red);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 10px 20px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-link {
+                font-size: 2rem;
+            }
+            
+            .menu-link .japanese {
+                font-size: 1rem;
+            }
+        }
+
+        .menu-link .japanese {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 1.8rem;
+            margin-left: 15px;
+            opacity: 0.7;
+        }
+
+        .menu-link:hover {
+            transform: translateX(10px);
+            opacity: 0.7;
+        }
+
+        /* Menu Hero Section */
+        .menu-hero {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--red);
+        }
+
+        .menu-hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 40px;
+        }
+
+        .menu-hero h1 {
+            font-size: 4rem;
+            font-weight: 400;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .menu-hero-tagline {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+        }
+
+        /* PDF Section */
+        .pdf-section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--cream);
+        }
+
+        .pdf-intro {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .pdf-intro h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .divider {
+            width: 84px;
+            height: 8px;
+            border-radius: 8px;
+            background: #FFD700;
+            margin: 30px auto;
+        }
+
+        .pdf-intro p {
+            font-size: 1.1rem;
+            color: rgba(34, 34, 34, 0.75);
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .pdf-container {
+            width: 100%;
+            background: white;
+            border: 3px solid var(--red);
+            box-shadow: 0 10px 40px rgba(209, 0, 1, 0.15);
+            min-height: 800px;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .pdf-embed {
+            width: 100%;
+            height: 1000px;
+            border: none;
+        }
+
+        .pdf-fallback {
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .pdf-fallback h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--text);
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border: 2px solid var(--red);
+            background: transparent;
+            color: var(--red);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            border-radius: 999px;
+            transition: all 0.3s;
+            font-family: 'Noto Sans JP', sans-serif;
+            margin-top: 20px;
+        }
+
+        .download-btn:hover {
+            background: var(--red);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(209, 0, 1, 0.3);
+        }
+
+        /* Signature Flavours Section */
+        .flavours-section {
+            padding: 100px 20px;
+            background: var(--red);
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            font-weight: 400;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .flavours-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .flavour-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .flavour-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .flag-label {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--red);
+            color: white;
+            padding: 6px 14px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border-radius: 6px;
+            z-index: 10;
+        }
+
+        .flavour-image {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .flavour-content {
+            padding: 24px;
+        }
+
+        .flavour-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--text);
+            text-transform: lowercase;
+        }
+
+        .flavour-card p {
+            color: rgba(34, 34, 34, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer - CREAM */
+        .footer {
+            background: var(--cream);
+            color: rgba(34, 34, 34, 0.7);
+            padding: 80px 20px 30px;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .footer-col h3 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--red);
+        }
+
+        .footer-col h4 {
+            font-family: 'Kind Human', system-ui;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--red);
+        }
+
+        .footer-tagline {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1.2rem;
+            color: var(--red);
+            opacity: 0.8;
+        }
+
+        .footer p {
+            color: rgba(34, 34, 34, 0.6);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .footer a {
+            color: var(--red);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer a:hover {
+            opacity: 0.7;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            transition: transform 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        .social-icons svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--red);
+            transition: opacity 0.3s;
+        }
+
+        .social-icons a:hover svg {
+            opacity: 0.7;
+        }
+
+        .map-container {
+            margin-top: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(209, 0, 1, 0.2);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+
+        /* Fade in animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .social-icons {
+                justify-content: center;
+            }
+
+            .menu-hero {
+                height: 40vh;
+            }
+
+            .menu-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .menu-hero-tagline {
+                font-size: 1rem;
+            }
+
+            .pdf-section {
+                padding: 60px 20px;
+            }
+
+            .pdf-intro h2 {
+                font-size: 2rem;
+            }
+
+            .pdf-embed {
+                height: 600px;
+            }
+
+            .flavours-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Full Screen Menu Overlay -->
+<div class="menu-overlay" id="menuOverlay">
+    <button class="close-menu" id="closeMenu" aria-label="Close Menu">×</button>
+    <div class="menu-content">
+        <a href="index.html" class="menu-link">Home <span class="japanese">ホーム</span></a>
+        <a href="about.html" class="menu-link">About <span class="japanese">私たちについて</span></a>
+        <a href="menu.html" class="menu-link">Menu <span class="japanese">メニュー</span></a>
+    </div>
+</div>
+
+<!-- Menu Hero Section -->
+<section class="menu-hero">
+    <div class="hero-logo">
+        <img src="logo.png" alt="KREMI Logo">
+    </div>
+    <div class="hero-hamburger">
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+    <div class="menu-hero-content">
+        <h1>Our Menu</h1>
+        <div class="menu-hero-tagline">Handcrafted brûlée crêpes, torched to perfection.</div>
+    </div>
+</section>
+
+<section class="pdf-section">
+    <div class="pdf-intro fade-in">
+        <h2>What We Serve</h2>
+        <div class="divider"></div>
+        <p>Signature Japanese brûlée crêpes filled with fresh custard and seasonal fruits. Each crêpe is freshly torched right before your eyes for that perfect caramelized finish.</p>
+    </div>
+
+    <div class="pdf-container fade-in">
+        <embed src="menu.pdf" type="application/pdf" class="pdf-embed">
+        <div class="pdf-fallback">
+            <h3>View Our Menu</h3>
+            <p>If the menu doesn't display above, you can download it below.</p>
+            <a href="menu.pdf" download class="download-btn">Download Menu PDF</a>
+        </div>
+    </div>
+</section>
+
+<!-- Signature Flavours Section -->
+<section class="flavours-section">
+    <div class="section-title fade-in">
+        <h2>signature flavours</h2>
+        <p class="section-subtitle">hand-torched • made-to-order</p>
+    </div>
+    
+    <div class="flavours-grid">
+        <div class="flavour-card fade-in">
+            <span class="flag-label">best seller</span>
+            <img class="flavour-image" src="heropagedesign.png" alt="Matcha Brûlée">
+            <div class="flavour-content">
+                <h3>matcha brûlée</h3>
+                <p>Matcha crepe shell, custard, torched caramel crust. Balanced, bittersweet finish.</p>
+            </div>
+        </div>
+
+        <div class="flavour-card fade-in">
+            <span class="flag-label">seasonal</span>
+            <img class="flavour-image" src="heropagedesign.png" alt="Strawberry Custard">
+            <div class="flavour-content">
+                <h3>strawberry custard</h3>
+                <p>Fresh strawberries, creamy custard, a caramelised top – bright and photogenic.</p>
+            </div>
+        </div>
+
+        <div class="flavour-card fade-in">
+            <span class="flag-label">classic</span>
+            <img class="flavour-image" src="heropagedesign.png" alt="Classic Custard">
+            <div class="flavour-content">
+                <h3>classic custard</h3>
+                <p>Velvety custard finished with a thin torched crust – simple and timeless.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer - CREAM -->
+<footer id="contact" class="footer">
+    <div class="footer-content fade-in">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>KREMI</h3>
+                <p class="footer-tagline">焼きたてのクレープ</p>
+                <p style="margin-top: 15px;">Freshly torched Japanese brûlée crêpes crafted with love in Singapore.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Visit Us</h4>
+                <p>Orchard Central</p>
+                <p>181 Orchard Road</p>
+                <p>Singapore 238896</p>
+                <p style="margin-top: 10px;">Daily: 11am - 9pm</p>
+                
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8019204749657!2d103.83929431475395!3d1.3010471990452833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19a4f8d5c46f%3A0xe46c9cf15c85a4d8!2sOrchard%20Central!5e0!3m2!1sen!2ssg!4v1234567890123!5m2!1sen!2ssg" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <p><a href="mailto:hello@kremi.sg">hello@kremi.sg</a></p>
+                <p><a href="https://instagram.com/kremi.sg">@kremi.sg</a></p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Xiaohongshu">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50">
+                            <text x="50" y="25" font-family="Arial" font-size="40" fill="#FF2442" text-anchor="middle">小红书</text>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="TikTok">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="divider" style="margin: 50px auto 30px;"></div>
+        <p style="font-size: 15px; opacity: 0.6;">© 2025 KREMI · Designed thoughtfully by Harshith Chinni</p>
+    </div>
+</footer>
+
+<script>
+    // Fade-in animation on scroll
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if(e.isIntersecting) e.target.classList.add('visible');
+        });
+    }, { threshold: 0.16 });
+
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+    // Hamburger Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const closeMenu = document.getElementById('closeMenu');
+    const menuLinks = document.querySelectorAll('.menu-link');
+
+    function openMenu() {
+        hamburger.classList.add('active');
+        menuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenuFunc() {
+        hamburger.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', openMenu);
+    closeMenu.addEventListener('click', closeMenuFunc);
+
+    // Close menu when clicking on a link
+    menuLinks.forEach(link => {
+        link.addEventListener('click', closeMenuFunc);
+    });
+
+    // Close menu when clicking outside
+    menuOverlay.addEventListener('click', (e) => {
+        if (e.target === menuOverlay) {
+            closeMenuFunc();
+        }
+    });
+</script>
+</body>
+</html>
