@@ -1,0 +1,89 @@
+    <!-- Instagram Section - RED -->
+    <section class="instagram-section">
+        <div class="section-title fade-in">
+            <h2>@kremi.sg</h2>
+        </div>
+        
+        <div class="instagram-grid">
+            <div class="insta-item fade-in">
+                <img src="/mnt/data/5f99168d-5728-4ccb-b429-4ff1b643a421.png" alt="KREMI Instagram">
+            </div>
+            <div class="insta-item fade-in">
+                <img src="/mnt/data/5f99168d-5728-4ccb-b429-4ff1b643a421.png" alt="KREMI Instagram">
+            </div>
+            <div class="insta-item fade-in">
+                <img src="/mnt/data/5f99168d-5728-4ccb-b429-4ff1b643a421.png" alt="KREMI Instagram">
+            </div>
+            <div class="insta-item fade-in">
+                <img src="/mnt/data/5f99168d-5728-4ccb-b429-4ff1b643a421.png" alt="KREMI Instagram">
+            </div>
+            <div class="insta-item fade-in">
+                <img src="/mnt/data/5f99168d-5728-4ccb-b429-4ff1b643a421.png" alt="KREMI Instagram">
+            </div>
+            <div class="insta-item fade-in">
+                <img src="/mnt/data/5f99168d-5728-4ccb-b429-4ff1b643a421.png" alt="KREMI Instagram">
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="https://instagram.com/kremi.sg" class="insta-link">Follow us on Instagram</a>
+        </div>
+    </section>
+
+
+        /* Instagram Section - RED BACKGROUND */
+        .instagram-section {
+            padding: 100px 20px;
+            background: var(--red);
+        }
+
+        .instagram-section .section-title h2 {
+            color: white;
+        }
+
+        .instagram-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .insta-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            border-radius: 12px;
+        }
+
+        .insta-item:hover {
+            border-color: white;
+            transform: scale(1.05);
+        }
+
+        .insta-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .insta-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 12px 28px;
+            border: 2px solid white;
+            border-radius: 999px;
+        }
+
+        .insta-link:hover {
+            background: white;
+            color: var(--red);
+        }
